@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>Ultimate Mobile Browser</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+
+    background:#0b1120;
+    color:white;
+
+    height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* TOPBAR */
+
+.topbar{
+
+    height:70px;
+
+    background:#111827;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.08);
+
+    z-index:99999;
+}
+
+.logo{
+
+    color:#8b5cf6;
+
+    font-size:18px;
+
+    font-weight:bold;
+}
+
+input{
+
+    flex:1;
+
+    height:48px;
+
+    border:none;
+    outline:none;
+
+    border-radius:14px;
+
+    background:#1f2937;
+
+    color:white;
+
+    padding:0 14px;
+
+    font-size:15px;
+}
+
+.go{
+
+    height:48px;
+
+    min-width:72px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #7c3aed,
+        #4f46e5
+    );
+
+    color:white;
+
+    font-weight:bold;
+
+    font-size:15px;
+}
+
+/* MAIN */
+
+.browser{
+
+    flex:1;
+
+    position:relative;
+
+    background:black;
+
+    padding-bottom:80px;
+}
+
+iframe{
+
+    width:100%;
+    height:100%;
+
+    border:none;
+
+    background:white;
+
+    position:relative;
+
+    z-index:1;
+}
+
+/* BLOCK */
+
+.block{
+
+    position:absolute;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    flex-direction:column;
+
+    text-align:center;
+
+    background:#0f172a;
+
+    z-index:10;
+
+    padding:25px;
+}
+
+.block h1{
+
+    color:#c084fc;
+
+    margin-bottom:15px;
+
+    font-size:30px;
+}
+
+.block p{
+
+    line-height:1.8;
+
+    color:#d1d5db;
+}
+
+/* VIDEO */
+
+.video-box{
+
+    height:200px;
+
+    background:#111827;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+
+    padding:10px;
+}
+
+.video-title{
+
+    color:#c4b5fd;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    font-weight:bold;
+}
+
+.video{
+
+    width:100%;
+    height:150px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:black;
+}
+
+/* MENU */
+
+.menu{
+
+    position:fixed;
+
+    right:12px;
+    bottom:95px;
+
+    width:250px;
+
+    max-height:420px;
+
+    overflow:auto;
+
+    background:#111827;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    border-radius:18px;
+
+    padding:12px;
+
+    display:none;
+
+    z-index:999999;
+}
+
+.quick{
+
+    background:#1f2937;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    margin-bottom:8px;
+
+    cursor:pointer;
+
+    transition:0.2s;
+
+    user-select:none;
+}
+
+.quick:active{
+
+    transform:scale(0.97);
+}
+
+/* INFO */
+
+.info{
+
+    margin-top:12px;
+
+    background:#1f2937;
+
+    border-radius:14px;
+
+    padding:14px;
+
+    line-height:1.7;
+
+    color:#86efac;
+
+    font-size:13px;
+}
+
+/* BOTTOM NAV */
+
+.bottom{
+
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:80px;
+
+    background:#111827;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+
+    display:flex;
+
+    justify-content:space-around;
+    align-items:center;
+
+    z-index:999999;
+}
+
+.nav{
+
+    width:58px;
+    height:58px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#1f2937;
+
+    color:white;
+
+    font-size:22px;
+
+    user-select:none;
+
+    -webkit-tap-highlight-color:
+    transparent;
+
+    touch-action:manipulation;
+}
+
+.nav:active{
+
+    transform:scale(0.95);
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- TOP -->
+
+<div class="topbar">
+
+    <div class="logo">
+        ⚡ Browser
+    </div>
+
+    <input
+        id="urlInput"
+        placeholder="Paste link..."
+    >
+
+    <button
+        class="go"
+        onclick="go()">
+
+        GO
+
+    </button>
+
+</div>
+
+<!-- BROWSER -->
+
+<div class="browser">
+
+    <iframe
+        id="frame"
+        src="https://example.com">
+    </iframe>
+
+    <div
+        class="block"
+        id="block">
+
+        <h1>
+            🚫 Blocked
+        </h1>
+
+        <p>
+
+            เว็บนี้ป้องกัน iframe
+            หรือ anti-bot
+
+            <br><br>
+
+            ระบบจะเปิดแท็บใหม่แทน
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- VIDEO -->
+
+<div class="video-box">
+
+    <div class="video-title">
+        🎬 Mini Video Player
+    </div>
+
+    <iframe
+        class="video"
+        id="video"
+        src="https://www.youtube.com/embed/jNQXAC9IVRw"
+        allowfullscreen>
+    </iframe>
+
+</div>
+
+<!-- MENU -->
+
+<div
+    class="menu"
+    id="menu">
+
+    <div
+        class="quick"
+        onclick="quick('https://google.com')">
+
+        🌍 Google
+
+    </div>
+
+    <div
+        class="quick"
+        onclick="quick('https://youtube.com')">
+
+        ▶️ YouTube
+
+    </div>
+
+    <div
+        class="quick"
+        onclick="quick('https://reddit.com')">
+
+        👽 Reddit
+
+    </div>
+
+    <div
+        class="quick"
+        onclick="quick('https://chatgpt.com')">
+
+        🤖 ChatGPT
+
+    </div>
+
+    <!-- CUSTOM -->
+
+    <div
+        class="quick"
+        onclick="quick('https://www2.avkuy.com/')">
+
+        🔥 AVKuy
+
+    </div>
+
+    <div
+        class="quick"
+        onclick="quick('https://thai-hotmodels.com/?ref=porndude')">
+
+        ❤️ Thai HotModels
+
+    </div>
+
+    <div
+        class="quick"
+        onclick="quick('https://xn--69-lqi2a1d7a3mzb.com/?ref=porndude')">
+
+        🌸 69 เว็บ
+
+    </div>
+
+    <div
+        class="quick"
+        onclick="quick('https://tik.porn/?ref=porndude')">
+
+        🎬 Tik Porn
+
+    </div>
+
+    <div class="info">
+
+        🛡️ Smart Protection
+
+        <br><br>
+
+        • Mobile optimized<br>
+        • Basic adblock<br>
+        • iframe detection<br>
+        • Auto new-tab fallback<br>
+        • Touch optimized
+
+    </div>
+
+</div>
+
+<!-- BOTTOM -->
+
+<div class="bottom">
+
+    <button
+        class="nav"
+        onclick="backPage()">
+
+        ⬅️
+
+    </button>
+
+    <button
+        class="nav"
+        onclick="reloadPage()">
+
+        🔄
+
+    </button>
+
+    <button
+        class="nav"
+        onclick="homePage()">
+
+        🏠
+
+    </button>
+
+    <button
+        class="nav"
+        onclick="toggleMenu()">
+
+        ☰
+
+    </button>
+
+</div>
+
+<script>
+
+const frame =
+document.getElementById("frame");
+
+const blocker =
+document.getElementById("block");
+
+function go(){
+
+    let url =
+    document
+    .getElementById("urlInput")
+    .value
+    .trim();
+
+    if(url === ""){
+        return;
+    }
+
+    if(
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+    ){
+
+        url =
+        "https://" + url;
+    }
+
+    load(url);
+}
+
+function load(url){
+
+    const blockedSites = [
+
+        "tik.porn",
+        "facebook",
+        "instagram",
+        "google",
+        "twitter",
+        "x.com",
+        "cloudflare"
+
+    ];
+
+    let blocked = false;
+
+    blockedSites.forEach(site => {
+
+        if(url.includes(site)){
+
+            blocked = true;
+        }
+
+    });
+
+    // OPEN NEW TAB
+    if(blocked){
+
+        blocker.style.display = "flex";
+
+        setTimeout(() => {
+
+            blocker.style.display = "none";
+
+            window.open(url, "_blank");
+
+        }, 1200);
+
+        return;
+    }
+
+    // NORMAL LOAD
+    blocker.style.display = "none";
+
+    frame.src = url;
+
+    detectVideo(url);
+}
+
+function quick(url){
+
+    load(url);
+
+    toggleMenu();
+}
+
+function detectVideo(url){
+
+    const video =
+    document.getElementById("video");
+
+    // youtube normal
+    if(
+        url.includes(
+            "youtube.com/watch?v="
+        )
+    ){
+
+        let id =
+        url.split("v=")[1];
+
+        if(id.includes("&")){
+            id = id.split("&")[0];
+        }
+
+        video.src =
+        "https://www.youtube.com/embed/" + id;
+    }
+
+    // youtu.be
+    else if(
+        url.includes("youtu.be/")
+    ){
+
+        let id =
+        url.split("youtu.be/")[1];
+
+        if(id.includes("?")){
+            id = id.split("?")[0];
+        }
+
+        video.src =
+        "https://www.youtube.com/embed/" + id;
+    }
+}
+
+function backPage(){
+
+    try{
+
+        frame.contentWindow.history.back();
+
+    }catch(e){}
+}
+
+function reloadPage(){
+
+    frame.src = frame.src;
+}
+
+function homePage(){
+
+    frame.src =
+    "https://example.com";
+}
+
+function toggleMenu(){
+
+    const menu =
+    document.getElementById("menu");
+
+    if(
+        menu.style.display === "block"
+    ){
+
+        menu.style.display = "none";
+    }
+
+    else{
+
+        menu.style.display = "block";
+    }
+}
+
+document
+.getElementById("urlInput")
+.addEventListener("keypress", e => {
+
+    if(e.key === "Enter"){
+
+        go();
+
+    }
+
+});
+
+// -----------------------
+// SIMPLE ADBLOCK
+// -----------------------
+
+setInterval(() => {
+
+    try{
+
+        const doc =
+        frame.contentWindow.document;
+
+        const selectors = [
+
+            '[id*=ad]',
+            '[class*=ad]',
+            '[class*=banner]',
+            '.popup',
+            '.sponsor',
+            'iframe[src*=ads]'
+
+        ];
+
+        selectors.forEach(selector => {
+
+            doc
+            .querySelectorAll(selector)
+            .forEach(el => {
+
+                el.remove();
+
+            });
+
+        });
+
+    }catch(e){
+
+        // cross-origin blocked
+
+    }
+
+}, 2000);
+
+</script>
+
+</body>
+</html>
