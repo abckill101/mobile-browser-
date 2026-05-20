@@ -2,286 +2,404 @@
 <html lang="th">
 <head>
 
-<meta charset="UTF-8">
+<meta charset="UTF-8"/>
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+content="
+width=device-width,
+initial-scale=1,
+viewport-fit=cover
+"
+/>
 
-<title>Ultimate Mobile Browser</title>
+<title>Premium Mobile Video Gallery</title>
 
 <style>
+
+/* =========================
+THEME
+========================= */
+
+:root{
+
+    --bg:#eef5ff;
+
+    --card:#ffffff;
+
+    --blue:#53b7ff;
+
+    --blue2:#7fd5ff;
+
+    --orange:#ff9f43;
+
+    --gold:#ffcc4d;
+
+    --text:#20242c;
+
+    --sub:#7f8b99;
+}
+
+/* =========================
+RESET
+========================= */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial;
 }
 
 body{
 
-    background:#0b1120;
-    color:white;
+    background:
+    linear-gradient(
+    180deg,
+    #eef5ff,
+    #f8fbff
+    );
 
-    height:100vh;
+    font-family:
+    "SF Pro Display",
+    "Segoe UI",
+    sans-serif;
+
+    color:var(--text);
 
     overflow:hidden;
 
-    display:flex;
-    flex-direction:column;
+    height:100vh;
 }
 
-/* TOPBAR */
+/* =========================
+TOPBAR
+========================= */
 
 .topbar{
 
-    height:70px;
+    position:fixed;
 
-    background:#111827;
+    top:0;
+    left:0;
+    right:0;
+
+    height:78px;
+
+    padding:
+    env(safe-area-inset-top)
+    14px
+    12px;
 
     display:flex;
 
     align-items:center;
 
-    gap:8px;
+    gap:10px;
 
-    padding:10px;
+    z-index:1000;
 
-    border-bottom:
-    1px solid rgba(255,255,255,0.08);
+    background:
+    rgba(255,255,255,.75);
 
-    z-index:99999;
+    backdrop-filter:
+    blur(18px);
 }
 
-.logo{
+/* SEARCH */
 
-    color:#8b5cf6;
-
-    font-size:18px;
-
-    font-weight:bold;
-}
-
-input{
+.search{
 
     flex:1;
 
-    height:48px;
+    height:50px;
 
     border:none;
+
+    border-radius:18px;
+
+    background:white;
+
+    padding:0 16px;
+
+    font-size:15px;
+
+    color:#222;
+
+    box-shadow:
+    0 8px 24px
+    rgba(83,183,255,.12);
+}
+
+.search:focus{
+
     outline:none;
 
-    border-radius:14px;
+    border:
+    2px solid var(--blue);
+}
 
-    background:#1f2937;
+/* ADD BUTTON */
+
+.add-btn{
+
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:50%;
+
+    font-size:28px;
 
     color:white;
 
-    padding:0 14px;
-
-    font-size:15px;
-}
-
-.go{
-
-    height:48px;
-
-    min-width:72px;
-
-    border:none;
-
-    border-radius:14px;
+    cursor:pointer;
 
     background:
     linear-gradient(
-        135deg,
-        #7c3aed,
-        #4f46e5
+    135deg,
+    var(--blue),
+    var(--blue2)
     );
 
-    color:white;
-
-    font-weight:bold;
-
-    font-size:15px;
+    box-shadow:
+    0 10px 24px
+    rgba(83,183,255,.35);
 }
 
-/* MAIN */
+/* =========================
+CONTENT
+========================= */
 
-.browser{
+.content{
 
-    flex:1;
+    position:fixed;
+
+    top:78px;
+    left:0;
+    right:0;
+    bottom:84px;
+
+    overflow-y:auto;
+
+    padding:14px;
+
+    -webkit-overflow-scrolling:
+    touch;
+}
+
+/* =========================
+GRID
+========================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:14px;
+}
+
+/* =========================
+CARD
+========================= */
+
+.card{
+
+    background:white;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 12px 28px
+    rgba(83,183,255,.10);
+
+    animation:fade .22s ease;
+}
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+/* =========================
+THUMB
+========================= */
+
+.thumb{
 
     position:relative;
 
-    background:black;
+    aspect-ratio:3/4;
 
-    padding-bottom:80px;
+    overflow:hidden;
+
+    background:#dfe7ef;
 }
 
-iframe{
+.thumb img{
 
     width:100%;
     height:100%;
 
-    border:none;
-
-    background:white;
-
-    position:relative;
-
-    z-index:1;
+    object-fit:cover;
 }
 
-/* BLOCK */
+/* PLAY */
 
-.block{
+.play{
 
     position:absolute;
 
     inset:0;
 
-    display:none;
+    display:flex;
 
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 
-    flex-direction:column;
+    font-size:44px;
 
-    text-align:center;
+    color:white;
 
-    background:#0f172a;
+    background:
+    rgba(0,0,0,.16);
 
-    z-index:10;
+    backdrop-filter:
+    blur(4px);
 
-    padding:25px;
+    cursor:pointer;
 }
 
-.block h1{
+/* DURATION */
 
-    color:#c084fc;
+.duration{
 
-    margin-bottom:15px;
+    position:absolute;
 
-    font-size:30px;
+    right:10px;
+    bottom:10px;
+
+    background:
+    rgba(255,255,255,.9);
+
+    color:#222;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    padding:5px 8px;
+
+    border-radius:10px;
 }
 
-.block p{
+/* =========================
+INFO
+========================= */
 
-    line-height:1.8;
-
-    color:#d1d5db;
+.info{
+    padding:12px;
 }
 
-/* VIDEO */
+.title{
 
-.video-box{
+    font-size:13px;
 
-    height:200px;
+    font-weight:600;
 
-    background:#111827;
-
-    border-top:
-    1px solid rgba(255,255,255,0.08);
-
-    padding:10px;
-}
-
-.video-title{
-
-    color:#c4b5fd;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 
     margin-bottom:8px;
-
-    font-size:14px;
-
-    font-weight:bold;
 }
 
-.video{
+.meta{
 
-    width:100%;
-    height:150px;
+    font-size:11px;
+
+    color:var(--sub);
+
+    margin-bottom:12px;
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.actions{
+
+    display:flex;
+
+    gap:8px;
+}
+
+.small-btn{
+
+    flex:1;
+
+    height:34px;
 
     border:none;
 
-    border-radius:14px;
-
-    background:black;
-}
-
-/* MENU */
-
-.menu{
-
-    position:fixed;
-
-    right:12px;
-    bottom:95px;
-
-    width:250px;
-
-    max-height:420px;
-
-    overflow:auto;
-
-    background:#111827;
-
-    border:
-    1px solid rgba(255,255,255,0.08);
-
-    border-radius:18px;
-
-    padding:12px;
-
-    display:none;
-
-    z-index:999999;
-}
-
-.quick{
-
-    background:#1f2937;
-
-    padding:14px;
-
     border-radius:12px;
 
-    margin-bottom:8px;
+    font-size:12px;
 
     cursor:pointer;
 
-    transition:0.2s;
-
-    user-select:none;
+    transition:.15s;
 }
 
-.quick:active{
+.small-btn:active{
 
-    transform:scale(0.97);
+    transform:scale(.96);
 }
 
-/* INFO */
+/* COPY */
 
-.info{
+.copy{
 
-    margin-top:12px;
+    background:
+    linear-gradient(
+    135deg,
+    #f5f8ff,
+    #e9f2ff
+    );
 
-    background:#1f2937;
-
-    border-radius:14px;
-
-    padding:14px;
-
-    line-height:1.7;
-
-    color:#86efac;
-
-    font-size:13px;
+    color:var(--blue);
 }
 
-/* BOTTOM NAV */
+/* DELETE */
+
+.delete{
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--orange),
+    #ff7b54
+    );
+
+    color:white;
+}
+
+/* =========================
+BOTTOM NAV
+========================= */
 
 .bottom{
 
@@ -291,471 +409,646 @@ iframe{
     right:0;
     bottom:0;
 
-    height:80px;
+    height:84px;
 
-    background:#111827;
+    background:
+    rgba(255,255,255,.84);
+
+    backdrop-filter:
+    blur(16px);
 
     border-top:
-    1px solid rgba(255,255,255,0.08);
+    1px solid #edf2f7;
 
     display:flex;
 
     justify-content:space-around;
+
     align-items:center;
 
-    z-index:999999;
+    padding-bottom:
+    env(safe-area-inset-bottom);
+
+    z-index:9999;
 }
 
-.nav{
+/* TAB */
 
-    width:58px;
-    height:58px;
+.tab{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:5px;
+
+    font-size:11px;
+
+    color:#8d99a8;
+
+    cursor:pointer;
+}
+
+/* ICON */
+
+.icon{
+
+    width:44px;
+    height:44px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+}
+
+/* ACTIVE TAB */
+
+.active{
+    color:var(--blue);
+}
+
+.active .icon{
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--blue),
+    var(--gold)
+    );
+
+    color:white;
+
+    box-shadow:
+    0 10px 24px
+    rgba(83,183,255,.26);
+}
+
+/* =========================
+PLAYER OVERLAY
+========================= */
+
+.player{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,.92);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:99999;
+}
+
+/* FIX VIDEO SIZE */
+
+.player video{
+
+    width:800px;
+    height:500px;
+
+    max-width:100%;
+    max-height:100%;
+
+    object-fit:contain;
+
+    background:black;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.45);
+}
+
+/* CLOSE BUTTON */
+
+.close-player{
+
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    width:50px;
+    height:50px;
 
     border:none;
 
-    border-radius:16px;
+    border-radius:50%;
 
-    background:#1f2937;
+    background:
+    rgba(255,255,255,.18);
+
+    backdrop-filter:
+    blur(10px);
 
     color:white;
 
     font-size:22px;
 
-    user-select:none;
+    cursor:pointer;
 
-    -webkit-tap-highlight-color:
-    transparent;
-
-    touch-action:manipulation;
+    z-index:5;
 }
 
-.nav:active{
+/* EMPTY */
 
-    transform:scale(0.95);
+.empty{
+
+    text-align:center;
+
+    margin-top:100px;
+
+    color:#95a3b5;
+
+    font-size:14px;
 }
 
 </style>
-
 </head>
+
 <body>
 
-<!-- TOP -->
+<!-- =========================
+TOPBAR
+========================= -->
 
 <div class="topbar">
 
-    <div class="logo">
-        ⚡ Browser
-    </div>
-
     <input
-        id="urlInput"
-        placeholder="Paste link..."
+        class="search"
+        id="search"
+        placeholder="วางลิงก์ mp4"
     >
 
     <button
-        class="go"
-        onclick="go()">
-
-        GO
-
+        class="add-btn"
+        id="addBtn"
+    >
+        +
     </button>
 
 </div>
 
-<!-- BROWSER -->
+<!-- =========================
+CONTENT
+========================= -->
 
-<div class="browser">
-
-    <iframe
-        id="frame"
-        src="https://example.com">
-    </iframe>
+<div class="content">
 
     <div
-        class="block"
-        id="block">
-
-        <h1>
-            🚫 Blocked
-        </h1>
-
-        <p>
-
-            เว็บนี้ป้องกัน iframe
-            หรือ anti-bot
-
-            <br><br>
-
-            ระบบจะเปิดแท็บใหม่แทน
-
-        </p>
-
-    </div>
+        class="grid"
+        id="grid"
+    ></div>
 
 </div>
 
-<!-- VIDEO -->
-
-<div class="video-box">
-
-    <div class="video-title">
-        🎬 Mini Video Player
-    </div>
-
-    <iframe
-        class="video"
-        id="video"
-        src="https://www.youtube.com/embed/jNQXAC9IVRw"
-        allowfullscreen>
-    </iframe>
-
-</div>
-
-<!-- MENU -->
-
-<div
-    class="menu"
-    id="menu">
-
-    <div
-        class="quick"
-        onclick="quick('https://google.com')">
-
-        🌍 Google
-
-    </div>
-
-    <div
-        class="quick"
-        onclick="quick('https://youtube.com')">
-
-        ▶️ YouTube
-
-    </div>
-
-    <div
-        class="quick"
-        onclick="quick('https://reddit.com')">
-
-        👽 Reddit
-
-    </div>
-
-    <div
-        class="quick"
-        onclick="quick('https://chatgpt.com')">
-
-        🤖 ChatGPT
-
-    </div>
-
-    <!-- CUSTOM -->
-
-    <div
-        class="quick"
-        onclick="quick('https://www2.avkuy.com/')">
-
-        🔥 AVKuy
-
-    </div>
-
-    <div
-        class="quick"
-        onclick="quick('https://thai-hotmodels.com/?ref=porndude')">
-
-        ❤️ Thai HotModels
-
-    </div>
-
-    <div
-        class="quick"
-        onclick="quick('https://xn--69-lqi2a1d7a3mzb.com/?ref=porndude')">
-
-        🌸 69 เว็บ
-
-    </div>
-
-    <div
-        class="quick"
-        onclick="quick('https://tik.porn/?ref=porndude')">
-
-        🎬 Tik Porn
-
-    </div>
-
-    <div class="info">
-
-        🛡️ Smart Protection
-
-        <br><br>
-
-        • Mobile optimized<br>
-        • Basic adblock<br>
-        • iframe detection<br>
-        • Auto new-tab fallback<br>
-        • Touch optimized
-
-    </div>
-
-</div>
-
-<!-- BOTTOM -->
+<!-- =========================
+BOTTOM NAV
+========================= -->
 
 <div class="bottom">
 
+    <!-- HOME -->
+
+    <div class="tab active">
+
+        <div class="icon">
+            ⌂
+        </div>
+
+        Home
+
+    </div>
+
+    <!-- LOADER -->
+
+    <div
+        class="tab"
+        id="loaderTab"
+    >
+
+        <div class="icon">
+            ⬇
+        </div>
+
+        Loader
+
+    </div>
+
+</div>
+
+<!-- =========================
+PLAYER
+========================= -->
+
+<div
+    class="player"
+    id="player"
+>
+
     <button
-        class="nav"
-        onclick="backPage()">
-
-        ⬅️
-
+        class="close-player"
+        id="closePlayer"
+    >
+        ✕
     </button>
 
-    <button
-        class="nav"
-        onclick="reloadPage()">
-
-        🔄
-
-    </button>
-
-    <button
-        class="nav"
-        onclick="homePage()">
-
-        🏠
-
-    </button>
-
-    <button
-        class="nav"
-        onclick="toggleMenu()">
-
-        ☰
-
-    </button>
+    <video
+        id="mainVideo"
+        controls
+        playsinline
+        webkit-playsinline
+        preload="metadata"
+    ></video>
 
 </div>
 
 <script>
 
-const frame =
-document.getElementById("frame");
+/* =========================
+STORAGE
+========================= */
 
-const blocker =
-document.getElementById("block");
+const STORAGE =
+"premium_mobile_video_gallery";
 
-function go(){
+/* =========================
+DATA
+========================= */
 
-    let url =
-    document
-    .getElementById("urlInput")
-    .value
-    .trim();
+let videos =
+JSON.parse(
+localStorage.getItem(STORAGE)
+) || [];
 
-    if(url === ""){
+/* =========================
+ELEMENTS
+========================= */
+
+const grid =
+document.getElementById("grid");
+
+/* =========================
+SAVE
+========================= */
+
+function save(){
+
+    localStorage.setItem(
+        STORAGE,
+        JSON.stringify(videos)
+    );
+}
+
+/* =========================
+VALIDATE
+========================= */
+
+function validVideo(url){
+
+    return(
+
+        url.includes(".mp4") ||
+
+        url.includes("blob:") ||
+
+        url.includes("video")
+    );
+}
+
+/* =========================
+CREATE CARD
+========================= */
+
+function createCard(video){
+
+    const card =
+    document.createElement("div");
+
+    card.className = "card";
+
+    card.dataset.url =
+    video.url;
+
+    card.innerHTML = `
+
+    <div class="thumb">
+
+        <img
+            loading="lazy"
+            src="${video.thumb}"
+        >
+
+        <div class="play">
+            ▶
+        </div>
+
+        <div class="duration">
+            800×500
+        </div>
+
+    </div>
+
+    <div class="info">
+
+        <div class="title">
+            ${video.url}
+        </div>
+
+        <div class="meta">
+            Premium MP4 Video
+        </div>
+
+        <div class="actions">
+
+            <button
+                class="small-btn copy"
+            >
+                Copy
+            </button>
+
+            <button
+                class="small-btn delete"
+            >
+                Delete
+            </button>
+
+        </div>
+
+    </div>
+    `;
+
+    return card;
+}
+
+/* =========================
+RENDER
+========================= */
+
+function render(){
+
+    grid.innerHTML = "";
+
+    if(videos.length === 0){
+
+        grid.innerHTML = `
+        <div class="empty">
+            ยังไม่มีวิดีโอ
+        </div>
+        `;
+
         return;
     }
 
-    if(
-        !url.startsWith("http://") &&
-        !url.startsWith("https://")
-    ){
+    const fragment =
+    document.createDocumentFragment();
 
-        url =
-        "https://" + url;
-    }
+    videos
+    .slice(0,6)
+    .forEach(video=>{
 
-    load(url);
-}
-
-function load(url){
-
-    const blockedSites = [
-
-        "tik.porn",
-        "facebook",
-        "instagram",
-        "google",
-        "twitter",
-        "x.com",
-        "cloudflare"
-
-    ];
-
-    let blocked = false;
-
-    blockedSites.forEach(site => {
-
-        if(url.includes(site)){
-
-            blocked = true;
-        }
-
+        fragment.appendChild(
+            createCard(video)
+        );
     });
 
-    // OPEN NEW TAB
-    if(blocked){
+    grid.appendChild(fragment);
+}
 
-        blocker.style.display = "flex";
+/* =========================
+ADD VIDEO
+========================= */
 
-        setTimeout(() => {
+function addVideo(){
 
-            blocker.style.display = "none";
+    const input =
+    document.getElementById(
+        "search"
+    );
 
-            window.open(url, "_blank");
+    const url =
+    input.value.trim();
 
-        }, 1200);
+    if(!url){
+
+        alert(
+            "กรุณาใส่ลิงก์"
+        );
 
         return;
     }
 
-    // NORMAL LOAD
-    blocker.style.display = "none";
+    if(!validVideo(url)){
 
-    frame.src = url;
+        alert(
+            "ลิงก์ไม่รองรับ"
+        );
 
-    detectVideo(url);
-}
-
-function quick(url){
-
-    load(url);
-
-    toggleMenu();
-}
-
-function detectVideo(url){
-
-    const video =
-    document.getElementById("video");
-
-    // youtube normal
-    if(
-        url.includes(
-            "youtube.com/watch?v="
-        )
-    ){
-
-        let id =
-        url.split("v=")[1];
-
-        if(id.includes("&")){
-            id = id.split("&")[0];
-        }
-
-        video.src =
-        "https://www.youtube.com/embed/" + id;
+        return;
     }
 
-    // youtu.be
-    else if(
-        url.includes("youtu.be/")
-    ){
+    videos.unshift({
 
-        let id =
-        url.split("youtu.be/")[1];
+        id:Date.now(),
 
-        if(id.includes("?")){
-            id = id.split("?")[0];
-        }
+        url,
 
-        video.src =
-        "https://www.youtube.com/embed/" + id;
-    }
-}
+        thumb:
+        "https://dummyimage.com/400x600/dbeeff/6aaeff&text=VIDEO"
+    });
 
-function backPage(){
+    save();
 
-    try{
+    render();
 
-        frame.contentWindow.history.back();
-
-    }catch(e){}
-}
-
-function reloadPage(){
-
-    frame.src = frame.src;
-}
-
-function homePage(){
-
-    frame.src =
-    "https://example.com";
-}
-
-function toggleMenu(){
-
-    const menu =
-    document.getElementById("menu");
-
-    if(
-        menu.style.display === "block"
-    ){
-
-        menu.style.display = "none";
-    }
-
-    else{
-
-        menu.style.display = "block";
-    }
+    input.value = "";
 }
 
 document
-.getElementById("urlInput")
-.addEventListener("keypress", e => {
+.getElementById("addBtn")
+.onclick =
+addVideo;
 
-    if(e.key === "Enter"){
+/* =========================
+ENTER KEY
+========================= */
 
-        go();
+document
+.getElementById("search")
+.addEventListener(
 
+    "keypress",
+
+    e=>{
+
+        if(e.key==="Enter"){
+
+            addVideo();
+        }
     }
+);
 
-});
+/* =========================
+GRID EVENTS
+========================= */
 
-// -----------------------
-// SIMPLE ADBLOCK
-// -----------------------
+grid.addEventListener(
 
-setInterval(() => {
+    "click",
+
+    e=>{
+
+        const card =
+        e.target.closest(".card");
+
+        if(!card) return;
+
+        const url =
+        card.dataset.url;
+
+        /* PLAY */
+
+        if(
+            e.target.closest(".play")
+        ){
+
+            const player =
+            document.getElementById(
+                "player"
+            );
+
+            const video =
+            document.getElementById(
+                "mainVideo"
+            );
+
+            player.style.display =
+            "flex";
+
+            video.src = url;
+
+            video.play();
+        }
+
+        /* COPY */
+
+        if(
+            e.target.closest(".copy")
+        ){
+
+            navigator.clipboard
+            .writeText(url);
+        }
+
+        /* DELETE */
+
+        if(
+            e.target.closest(".delete")
+        ){
+
+            videos =
+            videos.filter(
+                v=>v.url!==url
+            );
+
+            save();
+
+            render();
+        }
+    }
+);
+
+/* =========================
+CLOSE PLAYER
+========================= */
+
+document
+.getElementById(
+    "closePlayer"
+)
+.onclick = ()=>{
+
+    const player =
+    document.getElementById(
+        "player"
+    );
+
+    const video =
+    document.getElementById(
+        "mainVideo"
+    );
+
+    player.style.display =
+    "none";
+
+    video.pause();
+
+    video.src = "";
+};
+
+/* =========================
+LOADER TAB
+========================= */
+
+document
+.getElementById("loaderTab")
+.onclick = ()=>{
+
+    window.open(
+        "https://www.locoloader.com/",
+        "_blank"
+    );
+};
+
+/* =========================
+AUTO CLIPBOARD
+========================= */
+
+async function autoClipboard(){
 
     try{
 
-        const doc =
-        frame.contentWindow.document;
+        const text =
+        await navigator
+        .clipboard
+        .readText();
 
-        const selectors = [
+        if(
+            validVideo(text)
+        ){
 
-            '[id*=ad]',
-            '[class*=ad]',
-            '[class*=banner]',
-            '.popup',
-            '.sponsor',
-            'iframe[src*=ads]'
+            document
+            .getElementById(
+                "search"
+            )
+            .value = text;
+        }
 
-        ];
+    }catch{}
+}
 
-        selectors.forEach(selector => {
+autoClipboard();
 
-            doc
-            .querySelectorAll(selector)
-            .forEach(el => {
+/* =========================
+INIT
+========================= */
 
-                el.remove();
-
-            });
-
-        });
-
-    }catch(e){
-
-        // cross-origin blocked
-
-    }
-
-}, 2000);
+render();
 
 </script>
 
