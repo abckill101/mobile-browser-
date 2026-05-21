@@ -1,1 +1,672 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
 
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Tera Download Hub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Kanit',sans-serif;
+}
+
+/* BODY */
+
+body{
+
+    background:
+    radial-gradient(circle at top left,#ffd36e 0%,transparent 35%),
+    radial-gradient(circle at top right,#7ad7ff 0%,transparent 30%),
+    linear-gradient(180deg,#0f172a 0%,#111827 100%);
+
+    min-height:100vh;
+
+    color:white;
+
+    padding:20px;
+
+    overflow-x:hidden;
+}
+
+/* CONTAINER */
+
+.container{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+    margin-bottom:26px;
+}
+
+.logo{
+
+    width:88px;
+    height:88px;
+
+    margin:auto;
+
+    border-radius:26px;
+
+    background:
+    linear-gradient(135deg,#ffb300,#ff6f00,#29b6f6);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:40px;
+
+    box-shadow:
+    0 10px 30px rgba(255,179,0,.35),
+    0 10px 30px rgba(41,182,246,.25);
+
+    margin-bottom:16px;
+}
+
+.header h1{
+
+    font-size:30px;
+    font-weight:700;
+
+    background:
+    linear-gradient(90deg,#ffd54f,#ffffff,#4fc3f7);
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.header p{
+    color:#cbd5e1;
+    margin-top:6px;
+    font-size:14px;
+}
+
+/* SEARCH */
+
+.search-box{
+    margin-bottom:18px;
+}
+
+.search-input{
+
+    width:100%;
+
+    padding:16px 18px;
+
+    border:none;
+
+    border-radius:18px;
+
+    outline:none;
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    font-size:15px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(10px);
+}
+
+.search-input::placeholder{
+    color:#94a3b8;
+}
+
+/* CARD */
+
+.card{
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:24px;
+
+    padding:18px;
+
+    margin-bottom:16px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:5px;
+
+    background:
+    linear-gradient(90deg,#ffca28,#ff9800,#4fc3f7);
+}
+
+/* FILE TOP */
+
+.file-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:14px;
+}
+
+/* ICON */
+
+.icon{
+
+    width:58px;
+    height:58px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(135deg,#ffd54f,#ff9800);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:26px;
+
+    flex-shrink:0;
+
+    box-shadow:
+    0 6px 18px rgba(255,152,0,.35);
+}
+
+/* INFO */
+
+.info{
+    flex:1;
+}
+
+.info h2{
+    font-size:18px;
+    margin-bottom:4px;
+}
+
+.info span{
+    color:#cbd5e1;
+    font-size:13px;
+}
+
+/* BUTTON GROUP */
+
+.btn-group{
+    display:flex;
+    gap:10px;
+}
+
+/* BUTTON */
+
+.btn{
+
+    flex:1;
+
+    text-decoration:none;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:15px;
+}
+
+/* OPEN BUTTON */
+
+.open-btn{
+
+    background:
+    linear-gradient(135deg,#ffca28,#ff9800);
+
+    color:#111827;
+
+    box-shadow:
+    0 8px 18px rgba(255,152,0,.35);
+}
+
+.open-btn:hover{
+    transform:scale(1.03);
+}
+
+/* COPY BUTTON */
+
+.copy-btn{
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.copy-btn:hover{
+    background:rgba(255,255,255,.15);
+}
+
+/* FOOTER */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:28px;
+
+    color:#94a3b8;
+
+    font-size:13px;
+}
+
+/* GLOW */
+
+.glow{
+
+    position:fixed;
+
+    width:220px;
+    height:220px;
+
+    filter:blur(120px);
+
+    opacity:.18;
+
+    z-index:-1;
+}
+
+.g1{
+    top:-50px;
+    left:-50px;
+    background:#ff9800;
+}
+
+.g2{
+    bottom:-50px;
+    right:-50px;
+    background:#29b6f6;
+}
+
+/* EMPTY */
+
+.empty{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    padding:30px;
+}
+
+/* TOAST */
+
+.toast{
+
+    position:fixed;
+
+    bottom:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:#111827;
+
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    z-index:9999;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.35);
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+    body{
+        padding:14px;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    .btn{
+        padding:13px;
+        font-size:14px;
+    }
+
+    .header h1{
+        font-size:25px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo">☁️</div>
+
+        <h1>Tera Download Hub</h1>
+
+        <p>ระบบรวมลิงก์ดาวน์โหลดมือถือ</p>
+
+    </div>
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input
+        type="text"
+        class="search-input"
+        placeholder="ค้นหาลิงก์..."
+        id="searchInput">
+
+    </div>
+
+    <!-- CARD CONTAINER -->
+
+    <div id="cardContainer"></div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+        Modern Mobile UI • Gold & Sky Theme
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+   LINK DATA
+========================= */
+
+const links = [
+
+{
+    title:"รวม 53",
+    type:"Tera Downloader",
+    icon:"📦",
+    url:"https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DnkUZQCshYQJzwoKpHPbdag%26clearCache%3D1"
+},
+
+{
+    title:"รวม 23",
+    type:"Tera Downloader",
+    icon:"⚡",
+    url:"https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DodDtDeyME6rRmqKistpvSg%26clearCache%3D1"
+},
+
+{
+    title:"TH-Live 8",
+    type:"Tera Downloader",
+    icon:"🔥",
+    url:"https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DvDTPqaF3orBTODojARG4Fw%26clearCache%3D1"
+},
+
+{
+    title:"Ngngam",
+    type:"Tera Downloader",
+    icon:"🌤️",
+    url:"https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DOCvzpORGIQt6d0_LfYrq4Q%26clearCache%3D1"
+},
+
+{
+    title:"Ngngam",
+    type:"1024 Tera",
+    icon:"💎",
+    url:"https://teradownloader.com/download?l=https%3A%2F%2Fwww.1024tera.com%2Fsharing%2Flink%3Fsurl%3DDCBMesZG16GFmW1kWHc9Fg"
+},
+
+{
+    title:"Lookmhee1993",
+    type:"1024 Tera",
+    icon:"💎",
+    url:"https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DnfItVYWHG7oZxhqT3JM4TQ%26clearCache%3D1"
+},
+
+{
+    title:"PimPattama",
+    type:"1024 Tera",
+    icon:"💎",
+    url:"https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DGxmYi1GxQCWQ4fjrT0ou1A%26clearCache%3D1"
+}
+
+];
+
+/* =========================
+   DOM
+========================= */
+
+const cardContainer =
+document.getElementById("cardContainer");
+
+/* =========================
+   RENDER CARD
+========================= */
+
+function renderCards(data){
+
+    if(data.length === 0){
+
+        cardContainer.innerHTML = `
+        <div class="empty">
+            ไม่พบลิงก์
+        </div>
+        `;
+
+        return;
+    }
+
+    cardContainer.innerHTML = "";
+
+    data.forEach(item => {
+
+        cardContainer.innerHTML += `
+
+        <div class="card">
+
+            <div class="file-top">
+
+                <div class="icon">
+                    ${item.icon}
+                </div>
+
+                <div class="info">
+
+                    <h2>${item.title}</h2>
+
+                    <span>${item.type}</span>
+
+                </div>
+
+            </div>
+
+            <div class="btn-group">
+
+                <a
+                class="btn open-btn"
+                href="${item.url}"
+                target="_blank">
+
+                เปิดลิงก์
+
+                </a>
+
+                <button
+                class="btn copy-btn"
+                onclick="copyLink(\`${item.url}\`)">
+
+                คัดลอก
+
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+    });
+
+}
+
+/* =========================
+   COPY LINK
+========================= */
+
+async function copyLink(link){
+
+    try{
+
+        await navigator.clipboard.writeText(link);
+
+        showToast("คัดลอกลิงก์แล้ว");
+
+    }catch(error){
+
+        const textarea =
+        document.createElement("textarea");
+
+        textarea.value = link;
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+
+        document.execCommand("copy");
+
+        document.body.removeChild(textarea);
+
+        showToast("คัดลอกลิงก์แล้ว");
+    }
+}
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(text){
+
+    const toast =
+    document.createElement("div");
+
+    toast.className = "toast";
+
+    toast.innerText = text;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+
+        toast.remove();
+
+    },2000);
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+document
+.getElementById("searchInput")
+.addEventListener("input",function(){
+
+    const keyword =
+    this.value.toLowerCase();
+
+    const filtered =
+    links.filter(item => {
+
+        return(
+
+            item.title
+            .toLowerCase()
+            .includes(keyword)
+
+            ||
+
+            item.type
+            .toLowerCase()
+            .includes(keyword)
+
+        );
+
+    });
+
+    renderCards(filtered);
+
+});
+
+/* =========================
+   START
+========================= */
+
+renderCards(links);
+
+</script>
+
+</body>
+</html>
