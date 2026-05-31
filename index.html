@@ -1,540 +1,883 @@
-Here is the updated HTML code. All links are now functional, the design has been modernized for better mobile usability, and formal icons have been replaced with a friendlier, more casual style.
-```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-  <title>✨ Tera Hub • ลิงก์สดใส</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>✨ Tera Hub • ดาวน์โหลดไว</title>
+    
+    <!-- ใช้ Google Fonts สำหรับทุกอุปกรณ์ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome สำหรับไอคอนที่สวยงาม -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Kanit', sans-serif;
-      background: #f9f7ff;
-      min-height: 100vh;
-      padding: 1.2rem 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-image: radial-gradient(circle at 20% 10%, #ffe7c1 0%, transparent 35%),
-                        radial-gradient(circle at 80% 15%, #d4f0ff 0%, transparent 40%),
-                        linear-gradient(145deg, #fcf9ff 0%, #f3edff 100%);
-    }
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-    .container {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
+        /* พื้นหลังแอนิเมชั่น */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 30s linear infinite;
+            z-index: 0;
+        }
 
-    /* HEADER สบาย ๆ */
-    .header {
-      text-align: center;
-      margin-bottom: 0.2rem;
-    }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-    .logo-box {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 0.5rem;
-    }
+        /* คอนเทนเนอร์หลัก */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
 
-    .logo-emoji {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(12px);
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3.2rem;
-      box-shadow: 0 10px 25px rgba(255, 180, 40, 0.25), 0 4px 12px rgba(100, 180, 255, 0.25);
-      border: 1px solid rgba(255,255,255,0.9);
-    }
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease;
+        }
 
-    .header h1 {
-      font-size: 2.1rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, #f97316, #f59e0b, #0ea5e9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -0.3px;
-      margin-bottom: 0.25rem;
-    }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .header p {
-      color: #5b6e8c;
-      font-size: 0.95rem;
-      font-weight: 300;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-    }
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
 
-    /* SEARCH */
-    .search-wrapper {
-      position: relative;
-    }
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
 
-    .search-input {
-      width: 100%;
-      padding: 1rem 1.4rem;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      border-radius: 40px;
-      font-size: 1rem;
-      color: #1e293b;
-      outline: none;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-      transition: all 0.2s;
-      background: #ffffffdd;
-    }
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+        }
 
-    .search-input:focus {
-      border-color: #fbbf24;
-      box-shadow: 0 8px 25px rgba(251, 191, 36, 0.25);
-      background: #fff;
-    }
+        .header p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
 
-    .search-input::placeholder {
-      color: #8b9cb0;
-      font-weight: 300;
-    }
+        /* แถบค้นหา */
+        .search-wrapper {
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
 
-    /* CARDS */
-    .card-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .card {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(14px);
-      border-radius: 2rem;
-      padding: 1.2rem 1.2rem 1.1rem;
-      border: 1px solid rgba(255,255,255,0.9);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.05), 0 4px 10px rgba(255,180,60,0.15);
-      transition: transform 0.2s ease, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 5px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    .card:active {
-      transform: scale(0.98);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-    }
+        .search-box:focus-within {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
 
-    .file-row {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
+        .search-icon {
+            padding: 15px 20px;
+            color: white;
+            font-size: 1.2rem;
+        }
 
-    /* ไอคอนไม่ทางการ ใช้ emoji หลากหลาย */
-    .file-icon {
-      width: 52px;
-      height: 52px;
-      background: #fff7e6;
-      border-radius: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      background: linear-gradient(145deg, #fef3c7, #ffe4b0);
-      box-shadow: 0 6px 14px rgba(253, 186, 50, 0.25);
-      color: #b45309;
-    }
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 1rem;
+            padding: 15px 10px;
+            font-family: 'Kanit', sans-serif;
+        }
 
-    .file-info {
-      flex: 1;
-    }
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
 
-    .file-info h2 {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: #1f2937;
-      margin-bottom: 0.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
+        .clear-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
 
-    .file-info span {
-      font-size: 0.8rem;
-      color: #5f6b7a;
-      background: #f1f5f9;
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
-      display: inline-block;
-      font-weight: 400;
-    }
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
 
-    .actions {
-      display: flex;
-      gap: 0.7rem;
-      margin-top: 0.2rem;
-    }
+        .clear-btn.show {
+            display: flex;
+        }
 
-    .btn {
-      border: none;
-      background: transparent;
-      font-family: 'Kanit', sans-serif;
-      font-weight: 500;
-      font-size: 0.9rem;
-      padding: 0.7rem 1rem;
-      border-radius: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      cursor: pointer;
-      transition: 0.2s;
-      flex: 1;
-      text-decoration: none;
-      backdrop-filter: blur(10px);
-    }
+        /* Grid สำหรับการ์ด */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
 
-    .open-btn {
-      background: #ffedd5;
-      color: #9a3412;
-      background: linear-gradient(115deg, #ffb347, #ff9f2f);
-      color: white;
-      box-shadow: 0 6px 15px rgba(255, 140, 0, 0.35);
-      border: 1px solid #ffb554;
-      font-weight: 500;
-    }
+        /* การ์ด */
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
 
-    .open-btn:active {
-      background: #f97316;
-      transform: scale(0.96);
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
 
-    .copy-btn {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid #e2e8f0;
-      color: #334155;
-      backdrop-filter: blur(8px);
-      background: #f8fafc;
-    }
+        /* ข้อมูลไฟล์ */
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex: 1;
+        }
 
-    .copy-btn:active {
-      background: #e2e8f0;
-      transform: scale(0.96);
-    }
+        .file-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .footer-note {
-      text-align: center;
-      color: #7b89a0;
-      font-size: 0.8rem;
-      margin-top: 0.5rem;
-      font-weight: 300;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-    }
+        .file-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
 
-    .empty-message {
-      text-align: center;
-      padding: 2.5rem;
-      background: rgba(255,255,255,0.5);
-      border-radius: 2rem;
-      color: #5e6f88;
-      font-size: 1rem;
-    }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
 
-    .toast-message {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1e293b;
-      color: #f8fafc;
-      padding: 0.8rem 1.8rem;
-      border-radius: 3rem;
-      font-size: 0.9rem;
-      backdrop-filter: blur(15px);
-      background: rgba(15, 23, 42, 0.9);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      z-index: 999;
-      white-space: nowrap;
-    }
+        .file-details {
+            flex: 1;
+            min-width: 0;
+        }
 
-    /* ปรับแต่งเล็กน้อย */
-    a {
-      text-decoration: none;
-    }
-  </style>
+        .file-details h3 {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: white;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+        }
+
+        .file-details .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 300;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ปุ่ม */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* สถิติ */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-value {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ปุ่มเลื่อนขึ้นด้านบน */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-top:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .scroll-top.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 10000;
+            animation: slideUp 0.3s ease;
+            white-space: nowrap;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+            }
+
+            .search-input {
+                font-size: 0.9rem;
+            }
+
+            .stats {
+                gap: 15px;
+            }
+
+            .stat-item {
+                padding: 10px 20px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Loading effect */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: white;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- HEADER -->
-    <div class="header">
-      <div class="logo-box">
-        <div class="logo-emoji">🍊✨</div>
-      </div>
-      <h1>Tera Hub</h1>
-      <p>📱 ดาวน์โหลดไว • ลิงก์สดใหม่</p>
-    </div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">📁</div>
+            <h1>Tera Download Hub</h1>
+            <p>✨ ระบบรวมลิงก์ดาวน์โหลด • เร็ว • ง่าย • สะดวก</p>
+        </div>
 
-    <!-- SEARCH -->
-    <div class="search-wrapper">
-      <input type="text" class="search-input" placeholder="🔍 ค้นหาชื่อหรือประเภท..." id="searchInput" />
-    </div>
-
-    <!-- CARDS จะถูกแทรกตรงนี้ -->
-    <div id="cardContainer" class="card-list"></div>
-
-    <div class="footer-note">
-      <span>🌸 แตะเปิด · คัดลอกง่าย</span>
-    </div>
-  </div>
-
-  <script>
-    (function() {
-      // ---------- ลิงก์ข้อมูลทั้งหมด (แก้ไขคอมม่าให้ถูกต้อง) ----------
-      const links = [
-        {
-          title: "รวม 53",
-          type: "Tera Downloader",
-          icon: "📦",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DnkUZQCshYQJzwoKpHPbdag%26clearCache%3D1"
-        },
-        {
-          title: "รวม 23",
-          type: "Tera Downloader",
-          icon: "⚡",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DodDtDeyME6rRmqKistpvSg%26clearCache%3D1"
-        },
-        {
-          title: "รวม 9",
-          type: "Tera 01-06-2569 04:45",
-          icon: "🍀",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3D1VuFo9h4Xmeyd7pftZzzlA%26clearCache%3D1"
-        },
-        {
-          title: "Trippytung",
-          type: "Tera 01-06-2569 04:48",
-          icon: "🌸",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DZlDHe2TUUcWPKk03NpEVxQ%26clearCache%3D1"
-        },
-        {
-          title: "รวม 9",
-          type: "Tera 01-06-2569 04:52",
-          icon: "☁️",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DDCsxVL19iCBqYyonnZamXg%26clearCache%3D1"
-        },
-        {
-          title: "รวม 9",
-          type: "Tera 01-06-2569 04:53",
-          icon: "🌈",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3D0YPVOWDRu4Z4PI2QeekRvQ%26clearCache%3D1"
-        },
-        {
-          title: "รวม 9",
-          type: "Tera 01-06-2569 04:54",
-          icon: "💫",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DKSK7-Du0CRkcUogIH_hsCg%26clearCache%3D1"
-        },
-        {
-          title: "รวม 9",
-          type: "Tera 01-06-2569 04:56",
-          icon: "🍭",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DLLgKl0Y3t2m2YCi1Z-a4_A%26clearCache%3D1"
-        },
-        {
-          title: "รวม 9",
-          type: "Tera 01-06-2569 04:58",
-          icon: "🫧",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DRA3xoXD4wjCgtzcqxMdvLQ%26clearCache%3D1"
-        },
-        {
-          title: "Ppkkimxx",
-          type: "Tera 01-06-2569 04:59",
-          icon: "🐣",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DYEAwTkJTFZLWfqxoLc07Iw%26clearCache%3D1"
-        },
-        {
-          title: "Jennny2118",
-          type: "Tera 01-06-2569 05:00",
-          icon: "🎈",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DIQDbL3wYilfHcfMH79ldvQ%26clearCache%3D1"
-        },
-        {
-          title: "Jennny2118",
-          type: "Tera 01-06-2569 05:02",
-          icon: "🍇",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DcSAC44Flea9YYZIeh45-ng%26clearCache%3D1"
-        },
-        {
-          title: "Japanchimg",
-          type: "Tera Downloader",
-          icon: "🍡",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3Dmyoca3KM5tiAiMMxP5wmBw%26clearCache%3D1"
-        },
-        {
-          title: "รวม 40",
-          type: "Tera Downloader",
-          icon: "🧸",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3D_rutYCSqNDsq97nhYPo0-w%26clearCache%3D1"
-        },
-        {
-          title: "รวม 72",
-          type: "Tera Downloader",
-          icon: "🪷",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DoqqZ2Ky2aU9NwfqitqvdhQ%26clearCache%3D1"
-        },
-        {
-          title: "รวม 37",
-          type: "Tera Downloader",
-          icon: "🍊",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DWi-W2g113lOKiKwVUZc-MA%26clearCache%3D1"
-        },
-        {
-          title: "Yuumeilyn",
-          type: "Tera Downloader",
-          icon: "✨",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2F1024terabox.com%2Fs%2F1uiFYpu6MXpsVbI09IX5iKw"
-        },
-        {
-          title: "TH-Live 8",
-          type: "Tera Downloader",
-          icon: "🔥",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DvDTPqaF3orBTODojARG4Fw%26clearCache%3D1"
-        },
-        {
-          title: "Ngngam",
-          type: "Tera Downloader",
-          icon: "🌤️",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DOCvzpORGIQt6d0_LfYrq4Q%26clearCache%3D1"
-        },
-        {
-          title: "Ngngam",
-          type: "1024 Tera",
-          icon: "💎",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fwww.1024tera.com%2Fsharing%2Flink%3Fsurl%3DDCBMesZG16GFmW1kWHc9Fg"
-        },
-        {
-          title: "Lookmhee1993",
-          type: "1024 Tera",
-          icon: "🍓",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DnfItVYWHG7oZxhqT3JM4TQ%26clearCache%3D1"
-        },
-        {
-          title: "PimPattama",
-          type: "1024 Tera",
-          icon: "🧋",
-          url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DGxmYi1GxQCWQ4fjrT0ou1A%26clearCache%3D1"
-        }
-      ];
-
-      const cardContainer = document.getElementById('cardContainer');
-      const searchInput = document.getElementById('searchInput');
-
-      // ฟังก์ชันแสดง Toast
-      function showToast(text) {
-        const toast = document.createElement('div');
-        toast.className = 'toast-message';
-        toast.innerText = text;
-        document.body.appendChild(toast);
-        setTimeout(() => {
-          toast.remove();
-        }, 2000);
-      }
-
-      // คัดลอกลิงก์
-      async function copyLink(link) {
-        try {
-          await navigator.clipboard.writeText(link);
-          showToast('📋 คัดลอกลิงก์แล้ว!');
-        } catch (e) {
-          const textarea = document.createElement('textarea');
-          textarea.value = link;
-          document.body.appendChild(textarea);
-          textarea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textarea);
-          showToast('📋 คัดลอกสำเร็จ');
-        }
-      }
-
-      // สร้างการ์ดจากข้อมูล
-      function renderCards(data) {
-        if (!data.length) {
-          cardContainer.innerHTML = `<div class="empty-message">🌸 ไม่พบลิงก์ที่ค้นหา</div>`;
-          return;
-        }
-
-        let html = '';
-        data.forEach(item => {
-          html += `
-            <div class="card">
-              <div class="file-row">
-                <div class="file-icon">${item.icon || '📁'}</div>
-                <div class="file-info">
-                  <h2>${escapeHTML(item.title)}</h2>
-                  <span>${escapeHTML(item.type)}</span>
-                </div>
-              </div>
-              <div class="actions">
-                <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn open-btn">🔗 เปิดลิงก์</a>
-                <button class="btn copy-btn" data-link="${item.url}">📋 คัดลอก</button>
-              </div>
+        <!-- สถิติ -->
+        <div class="stats" id="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalLinks">0</div>
+                <div class="stat-label">ลิงก์ทั้งหมด</div>
             </div>
-          `;
-        });
+            <div class="stat-item">
+                <div class="stat-value" id="visibleLinks">0</div>
+                <div class="stat-label">กำลังแสดง</div>
+            </div>
+        </div>
 
-        cardContainer.innerHTML = html;
+        <!-- ค้นหา -->
+        <div class="search-wrapper">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="ค้นหาชื่อไฟล์ หรือประเภท..." 
+                    id="searchInput"
+                    autocomplete="off"
+                />
+                <button class="clear-btn" id="clearBtn" title="ล้างการค้นหา">
+                    ✕
+                </button>
+            </div>
+        </div>
 
-        // ผูก event copy buttons
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-          btn.addEventListener('click', function(e) {
-            const link = this.getAttribute('data-link');
-            if (link) copyLink(link);
-          });
-        });
-      }
+        <!-- การ์ด -->
+        <div class="card-grid" id="cardGrid">
+            <!-- โหลดข้อมูลด้วย JavaScript -->
+        </div>
+    </div>
 
-      // กัน XSS เบื้องต้น
-      function escapeHTML(str) {
-        return String(str)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
+    <!-- ปุ่มเลื่อนขึ้นด้านบน -->
+    <button class="scroll-top" id="scrollTop" title="เลื่อนขึ้นด้านบน">
+        ↑
+    </button>
 
-      // ค้นหา
-      searchInput.addEventListener('input', function() {
-        const keyword = this.value.toLowerCase().trim();
-        const filtered = links.filter(item =>
-          item.title.toLowerCase().includes(keyword) ||
-          item.type.toLowerCase().includes(keyword)
-        );
-        renderCards(filtered);
-      });
+    <script>
+        (function() {
+            // ข้อมูลลิงก์ทั้งหมด
+            const linksData = [
+                {
+                    title: "รวม 53",
+                    type: "Tera Downloader",
+                    icon: "📦",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DnkUZQCshYQJzwoKpHPbdag%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 23",
+                    type: "Tera Downloader",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DodDtDeyME6rRmqKistpvSg%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 9",
+                    type: "Tera Downloader 01-06-2569 04:45 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3D1VuFo9h4Xmeyd7pftZzzlA%26clearCache%3D1"
+                },
+                {
+                    title: "Trippytung",
+                    type: "Tera Downloader 01-06-2569 04:48 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DZlDHe2TUUcWPKk03NpEVxQ%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 9",
+                    type: "Tera Downloader 01-06-2569 04:52 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DDCsxVL19iCBqYyonnZamXg%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 9",
+                    type: "Tera Downloader 01-06-2569 04:53 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3D0YPVOWDRu4Z4PI2QeekRvQ%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 9",
+                    type: "Tera Downloader 01-06-2569 04:54 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DKSK7-Du0CRkcUogIH_hsCg%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 9",
+                    type: "Tera Downloader 01-06-2569 04:56 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DLLgKl0Y3t2m2YCi1Z-a4_A%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 9",
+                    type: "Tera Downloader 01-06-2569 04:58 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DRA3xoXD4wjCgtzcqxMdvLQ%26clearCache%3D1"
+                },
+                {
+                    title: "Ppkkimxx",
+                    type: "Tera Downloader 01-06-2569 04:59 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DYEAwTkJTFZLWfqxoLc07Iw%26clearCache%3D1"
+                },
+                {
+                    title: "Jennny2118",
+                    type: "Tera Downloader 01-06-2569 05:00 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DIQDbL3wYilfHcfMH79ldvQ%26clearCache%3D1"
+                },
+                {
+                    title: "Jennny2118",
+                    type: "Tera Downloader 01-06-2569 05:02 น.",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DcSAC44Flea9YYZIeh45-ng%26clearCache%3D1"
+                },
+                {
+                    title: "Japanchimg",
+                    type: "Tera Downloader",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3Dmyoca3KM5tiAiMMxP5wmBw%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 40",
+                    type: "Tera Downloader",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3D_rutYCSqNDsq97nhYPo0-w%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 72",
+                    type: "Tera Downloader",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DoqqZ2Ky2aU9NwfqitqvdhQ%26clearCache%3D1"
+                },
+                {
+                    title: "รวม 37",
+                    type: "Tera Downloader",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.1024tera.com%2Fsharing%2Flink%3Fsurl%3DWi-W2g113lOKiKwVUZc-MA%26clearCache%3D1"
+                },
+                {
+                    title: "Yuumeilyn",
+                    type: "Tera Downloader",
+                    icon: "⚡",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2F1024terabox.com%2Fs%2F1uiFYpu6MXpsVbI09IX5iKw"
+                },
+                {
+                    title: "TH-Live 8",
+                    type: "Tera Downloader",
+                    icon: "🔥",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DvDTPqaF3orBTODojARG4Fw%26clearCache%3D1"
+                },
+                {
+                    title: "Ngngam",
+                    type: "Tera Downloader",
+                    icon: "🌤️",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DOCvzpORGIQt6d0_LfYrq4Q%26clearCache%3D1"
+                },
+                {
+                    title: "Ngngam",
+                    type: "1024 Tera",
+                    icon: "💎",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fwww.1024tera.com%2Fsharing%2Flink%3Fsurl%3DDCBMesZG16GFmW1kWHc9Fg"
+                },
+                {
+                    title: "Lookmhee1993",
+                    type: "1024 Tera",
+                    icon: "💎",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DnfItVYWHG7oZxhqT3JM4TQ%26clearCache%3D1"
+                },
+                {
+                    title: "PimPattama",
+                    type: "1024 Tera",
+                    icon: "💎",
+                    url: "https://teradownloader.com/download?l=https%3A%2F%2Fdm.terabox.app%2Fsharing%2Flink%3Fsurl%3DGxmYi1GxQCWQ4fjrT0ou1A%26clearCache%3D1"
+                }
+            ];
 
-      // เริ่มต้นแสดงทั้งหมด
-      renderCards(links);
-    })();
-  </script>
+            // DOM Elements
+            const cardGrid = document.getElementById('cardGrid');
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearBtn');
+            const scrollTopBtn = document.getElementById('scrollTop');
+            const totalLinksEl = document.getElementById('totalLinks');
+            const visibleLinksEl = document.getElementById('visibleLinks');
+
+            // อัพเดทสถิติ
+            totalLinksEl.textContent = linksData.length;
+
+            // ฟังก์ชันสร้างการ์ด
+            function createCards(data) {
+                cardGrid.innerHTML = '';
+                
+                if (data.length === 0) {
+                    cardGrid.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: white;">
+                            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
+                            <h3>ไม่พบลิงก์ที่ค้นหา</h3>
+                            <p style="margin-top: 10px; opacity: 0.8;">ลองค้นหาด้วยคำอื่น</p>
+                        </div>
+                    `;
+                } else {
+                    data.forEach((item, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.style.animationDelay = `${index * 0.05}s`;
+                        
+                        card.innerHTML = `
+                            <div class="file-info">
+                                <div class="file-icon">${item.icon}</div>
+                                <div class="file-details">
+                                    <h3>${escapeHtml(item.title)}</h3>
+                                    <span class="badge">${escapeHtml(item.type)}</span>
+                                </div>
+                            </div>
+                            <div class="button-group">
+                                <a href="${item.url}" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> เปิดลิงก์
+                                </a>
+                                <button class="btn btn-secondary copy-btn" data-url="${escapeHtml(item.url)}">
+                                    <i class="fas fa-copy"></i> คัดลอก
+                                </button>
+                            </div>
+                        `;
+                        
+                        cardGrid.appendChild(card);
+                    });
+                    
+                    // เพิ่ม event listeners สำหรับปุ่มคัดลอก
+                    document.querySelectorAll('.copy-btn').forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const url = this.getAttribute('data-url');
+                            copyToClipboard(url);
+                        });
+                    });
+                }
+                
+                // อัพเดทจำนวนที่แสดง
+                visibleLinksEl.textContent = data.length;
+            }
+
+            // ฟังก์ชันคัดลอก
+            function copyToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        showToast('✅ คัดลอกลิงก์เรียบร้อย!');
+                    }).catch(() => {
+                        fallbackCopy(text);
+                    });
+                } else {
+                    fallbackCopy(text);
+                }
+            }
+
+            function fallbackCopy(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('✅ คัดลอกลิงก์เรียบร้อย!');
+                } catch (err) {
+                    showToast('❌ ไม่สามารถคัดลอกได้');
+                }
+                document.body.removeChild(textarea);
+            }
+
+            // ฟังก์ชันแสดง Toast
+            function showToast(message) {
+                const existingToast = document.querySelector('.toast');
+                if (existingToast) {
+                    existingToast.remove();
+                }
+                
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.3s ease';
+                    setTimeout(() => toast.remove(), 300);
+                }, 2000);
+            }
+
+            // ฟังก์ชัน escape HTML
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // ค้นหา
+            function searchLinks(keyword) {
+                const searchTerm = keyword.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    return linksData;
+                }
+                
+                return linksData.filter(item => 
+                    item.title.toLowerCase().includes(searchTerm) ||
+                    item.type.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            // Event Listeners
+            searchInput.addEventListener('input', function(e) {
+                const keyword = e.target.value;
+                const filteredData = searchLinks(keyword);
+                createCards(filteredData);
+                
+                // แสดง/ซ่อนปุ่มล้าง
+                if (keyword.length > 0) {
+                    clearBtn.classList.add('show');
+                } else {
+                    clearBtn.classList.remove('show');
+                }
+            });
+
+            clearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                createCards(linksData);
+                clearBtn.classList.remove('show');
+                searchInput.focus();
+            });
+
+            // ปุ่มเลื่อนขึ้นด้านบน
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.classList.add('show');
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Ctrl+K หรือ / เพื่อค้นหา
+                if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement !== searchInput)) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+                // Escape เพื่อล้างการค้นหา
+                if (e.key === 'Escape' && document.activeElement === searchInput) {
+                    searchInput.value = '';
+                    createCards(linksData);
+                    clearBtn.classList.remove('show');
+                    searchInput.blur();
+                }
+            });
+
+            // เริ่มต้นแสดงข้อมูล
+            createCards(linksData);
+
+            // เพิ่มประสิทธิภาพการโหลด
+            window.addEventListener('load', function() {
+                document.body.style.opacity = '1';
+                document.body.style.transition = 'opacity 0.5s ease';
+            });
+
+            console.log('🚀 Tera Download Hub พร้อมใช้งานแล้ว!');
+            console.log('💡 Tips: กด / เพื่อค้นหา, กด Esc เพื่อล้างการค้นหา');
+        })();
+    </script>
 </body>
 </html>
-```
